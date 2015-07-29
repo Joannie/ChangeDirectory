@@ -9,6 +9,10 @@ public class Path {
     }
     
     public Path cd(String newPath) {
+            /*Use regular expression to match the string to what we want
+            and bring replace the original string by string analysis based on the Notes
+            Current bug: The first parent directory can't be parse sucessfully
+            */
         Path pathStr = new Path(this.path);
 
         if(newPath == null){
@@ -35,29 +39,11 @@ public class Path {
                     //System.out.println(pathStr.path);
                     //System.out.println(replaceDir[i]+i);
 
-                }
-               
+                }               
 
             }else{
                 System.out.println("Please check your input on changning directory!");
             }
-
-            /*first split the string by using "/" charater
-            store into the array
-            use switch to decide to which action should do
-            have an exception if the value in array is not the English alphabet
-            (use 'reguler expression')
-            should be note that the return value should also be Path object
-            */
-
-            /*
-                switch(temp){
-                    case "..":
-                        Path = path.delete(....)
-                    case "":
-
-                }
-            */
 
         }
         return pathStr;
