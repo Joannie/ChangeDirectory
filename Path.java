@@ -18,7 +18,7 @@ public class Path {
             if (newPath.matches("([\\.]{2}/)+[a-zA-z]+")){
                 String[] replaceDir = newPath.split("[\\.]{2}"); //stone the string of directory
 
-                System.out.println("Match!");
+                //System.out.println("Match!");
                 for(int i=1; i<replaceDir.length; i++){
                     if(replaceDir[i].matches("/")){
                         try{
@@ -32,14 +32,14 @@ public class Path {
                     else{
                         pathStr.path = pathStr.getPath() + replaceDir[i];
                     }
-                    System.out.println(pathStr.path);
-                    System.out.println(replaceDir[i]+i);
+                    //System.out.println(pathStr.path);
+                    //System.out.println(replaceDir[i]+i);
 
                 }
                
 
             }else{
-                System.out.println("not match");
+                System.out.println("Please check your input on changning directory!");
             }
 
             /*first split the string by using "/" charater
