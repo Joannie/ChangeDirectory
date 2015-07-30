@@ -39,12 +39,12 @@ public class Path {
                             pathStr.path = pathStr.getPath().substring(0, pathStr.getPath().length()-2);
                             //System.out.println("the path: " + pathStr.path);
                         }catch(StringIndexOutOfBoundsException e){
-                            System.out.println("This is the root path");
+                            System.out.println("Please check your input. Is the correct syntax for changing the directory?");
                             System.out.println(e.getMessage());
                             break;
                         }                  
                     }
-                    
+
                     /*Else, should remove last one and replace to the dir name*/
                     else{
                         try{
@@ -59,7 +59,7 @@ public class Path {
                     }
 
                 }
-                
+
             }else{
                 System.out.println("Please check your input. Is the correct syntax for changing the directory?");
             }
