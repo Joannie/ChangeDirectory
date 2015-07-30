@@ -1,3 +1,6 @@
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 public class Path {
     private String path;
     public Path(String path) {
@@ -15,38 +18,54 @@ public class Path {
             */
         Path pathStr = new Path(this.path);
 
-        if(newPath == null){
+        //Check if the path is not empty or null
+        if(newPath == null | newPath == ""){
              throw new UnsupportedOperationException("Waiting to be implemented.");
         }
         else{
+            /*Check the input is a correct format. 
+            Should contian the parent dir and path separator and dir name
+*           */
             if (newPath.matches("([\\.]{2}/)+[a-zA-z]+")){
-                String[] replaceDir = newPath.split("[\\.]{2}"); //stone the string of directory
+                Pattern reg = Pattern.compile("/([a-zA-z]*)");//Split the input str by slash or slash plus english alphabet letters
+                Matcher m = reg.matcher(newPath); //mathch this reg pattern with input str  
 
-                //System.out.println("Match!");
-                for(int i=1; i<replaceDir.length; i++){
-                    if(replaceDir[i].matches("/")){
+                while(m.find()){
+                    //System.out.println(m.group());
+                    
+                    /*If found the group contians the slash, then should remove the last one path*/
+                    if(m.group().matches("/")){
                         try{
                             pathStr.path = pathStr.getPath().substring(0, pathStr.getPath().length()-2);
+                            //System.out.println("the path: " + pathStr.path);
                         }catch(StringIndexOutOfBoundsException e){
                             System.out.println("This is the root path");
                             System.out.println(e.getMessage());
                             break;
-                        }
+                        }                  
                     }
+                    
+                    /*Else, should remove last one and replace to the dir name*/
                     else{
-                        pathStr.path = pathStr.getPath() + replaceDir[i];
+                        try{
+                            pathStr.path = pathStr.getPath().substring(0, pathStr.getPath().length()-2);
+                            pathStr.path = pathStr.getPath() + m.group();
+                        }catch(StringIndexOutOfBoundsException e){
+                            System.out.println("Your directory is beyond the root dir. Please type again!");
+                            System.out.println(e.getMessage());
+                            break;
+                        }
+
                     }
-                    //System.out.println(pathStr.path);
-                    //System.out.println(replaceDir[i]+i);
 
-                }               
-
+                }
+                
             }else{
-                System.out.println("Please check your input on changning directory!");
+                System.out.println("Please check your input. Is the correct syntax for changing the directory?");
             }
-
         }
         return pathStr;
+        
     }
     
     public static void main(String[] args) {
